@@ -1,0 +1,13 @@
+----------------------------------------------------------------
+Fri Dec 13 06:54:26 UTC 2024:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.17.1.0 - (1913217): instance a816c00e-0193-becc-16f7-000006c78ab0 
+on database directory /Users/yienishaabeyratne/Documents/Projects/cashcardapp/src/main/resources/.dbo with class loader com.intellij.database.remote.jdbc.impl.JdbcClassLoader$JdbcClassLoaderImpl@48140564 
+Loaded from file:/Users/yienishaabeyratne/Library/Application%20Support/JetBrains/IntelliJIdea2024.3/jdbc-drivers/Apache%20Derby/10.17.1.0/org/apache/derby/derby/10.17.1.0/derby-10.17.1.0.jar
+java.vendor=JetBrains s.r.o.
+java.runtime.version=21.0.5+8-b631.28
+user.dir=/Users/yienishaabeyratne/Documents/Projects/cashcardapp
+os.name=Mac OS X
+os.arch=aarch64
+os.version=15.1.1
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
