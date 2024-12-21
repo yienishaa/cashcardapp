@@ -1,5 +1,6 @@
 package com.example.cashcardapp.controller;
 
+import com.example.cashcardapp.model.CardDataModel;
 import com.example.cashcardapp.repository.CashCardRepository;
 import com.example.cashcardapp.service.CashCard;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,37 +11,39 @@ import org.springframework.http.ResponseEntity;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/cashcards")
-public class CashCardController {
+public class CashCardController implements CashCardControllerInterface{
+
+    private final CashCard cashCard;
 
     @Autowired
-    private final CashCardRepository cashCardRepository;
-
-    private CashCardController(CashCardRepository cashCardRepository) {
-        this.cashCardRepository = cashCardRepository;
+    private CashCardController(CashCard cashCard) {
+        this.cashCard = cashCard;
     }
 
-    @GetMapping("/q") //GetMapping tells Spring to route only GET requests
-    public ResponseEntity<String> findById(@RequestParam Integer requestId) {
+    @Override
+    public ResponseEntity<CashCard> findById(Integer requestId) {
         //the requestId variable name matches the one in URL so Spring knows to assign value
-        //CashCard cashCard = new CashCard(requestId, 123.22);
 
-        System.out.println("req id = "+requestId);
-        Optional<CashCard> cashCard = cashCardRepository.findById(requestId);
-        //We're calling CrudRepository.findById, which returns an Optional.
+        Optional<CashCard> cashCardObj = Optional.ofNullable(cashCard);
+        //We're calling JpaRepository.findById, which returns an Optional.
         // This smart object might or might not contain the CashCard for which we're searching
-        //System.out.println(cashCard.get());
-        if (cashCard.isPresent()) {
-            System.out.println("no eeror");
-            return new ResponseEntity<>(cashCard.get().toString(), HttpStatus.OK);
+
+        if (cashCardObj.isPresent()) {
+            return new ResponseEntity<>(cashCardObj.get(), HttpStatus.OK);
         }
         else{
-            System.out.println("eeror");
-            return new ResponseEntity<>("Not found",HttpStatus.OK);
+            return new ResponseEntity<>(HttpStatus.OK);
         }
     }
 
+    @Override
+    public ResponseEntity<String> addCashCard(Integer requestId, CardDataModel cashCard) {
+        System.out.println("Req ID "+requestId);
+        System.out.println("CashCard "+cashCard);
+        this.cashCard.create(cashCard);
+
+        return new ResponseEntity<>("Added",HttpStatus.OK);
+    }
 
 
-    
 }

@@ -1,1 +1,1 @@
-INSERT INTO CASH_CARD(id, amount) VALUES (92, 239.12);
+//INSERT INTO CASH_CARD(id, amount, version) VALUES (92, 239.12, 0);
