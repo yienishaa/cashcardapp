@@ -1,10 +1,10 @@
-package com.example.cashcardapp;
+package com.example.uitschedulecreator;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class CashcardappApplicationTests {
+class UitScheduleCreatorApplicationTests {
 
     @Test
     void contextLoads() {
