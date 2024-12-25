@@ -1,13 +1,17 @@
 package com.example.uitschedulecreator.service;
 
-import com.example.uitschedulecreator.model.PtStudentModel;
+import com.example.uitschedulecreator.entity.PtStudentEntity;
 import com.example.uitschedulecreator.repository.PtStudentRepository;
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Getter
+@Setter
 @Service
 public class PtStudentService implements PtStudentServiceInterface{
 
@@ -19,27 +23,25 @@ public class PtStudentService implements PtStudentServiceInterface{
     }
 
     @Override
-    public PtStudentModel createPtStudent(PtStudentModel ptStudentModel) {
-        return ptStudentRepository.save(ptStudentModel);
+    public PtStudentEntity createPtStudent(PtStudentEntity ptStudentEntity) {
+        return ptStudentRepository.save(ptStudentEntity);
     }
 
     @Override
-    public PtStudentModel updatePtStudent(PtStudentModel ptStudentModel) {
-        return ptStudentRepository.save(ptStudentModel);
+    public void deletePtStudentById(Integer studentId) {
+        if(ptStudentRepository.existsById(studentId)) {
+            ptStudentRepository.deleteById(studentId);
+        }
     }
 
     @Override
-    public void deletePtStudent(PtStudentModel ptStudentModel) {
-        ptStudentRepository.delete(ptStudentModel);
+    public List<PtStudentEntity> getAllPtStudents() {
+
+        return ptStudentRepository.findAll();
     }
 
     @Override
-    public List<PtStudentModel> getAllPtStudents() {
-        return List.of();
-    }
-
-    @Override
-    public Optional<PtStudentModel> getPtStudentById(int id) {
+    public Optional<PtStudentEntity> getPtStudentById(int id) {
         return ptStudentRepository.findById(id);
     }
 

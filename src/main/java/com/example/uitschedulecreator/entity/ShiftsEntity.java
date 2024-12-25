@@ -1,11 +1,14 @@
-package com.example.uitschedulecreator.model;
+package com.example.uitschedulecreator.entity;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -16,19 +19,25 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "SHIFT")
-public class ShiftsModel {
+public class ShiftsEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+
+    @Column(name = "shiftId")
     private Integer shiftId;
 
+    @Column(name = "shiftDescription")
     private String shiftDescription;
 
+    @Column(name = "hours")
     private Double hours;
 
     //One shift can have may availablilies
     @OneToMany(mappedBy = "shiftId")
-    private Set<AvailabilityModel> availabilities;
+    private Set<AvailabilityEntity> availabilities;
 
 }

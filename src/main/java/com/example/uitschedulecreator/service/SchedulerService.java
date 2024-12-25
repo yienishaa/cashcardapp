@@ -1,7 +1,7 @@
 package com.example.uitschedulecreator.service;
 
 
-import com.example.uitschedulecreator.model.AvailabilityModel;
+import com.example.uitschedulecreator.entity.AvailabilityEntity;
 import com.example.uitschedulecreator.repository.AvailabilityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,13 @@ public class SchedulerService implements SchedulerServiceInterface {
     }
 
     @Override
-    public AvailabilityModel getAvailability(Integer id) {
+    public AvailabilityEntity getAvailability(Integer id) {
         return availability.findById(id).get();
     }
 
     @Override
-    public void deleteAvailability(AvailabilityModel availabilityModel) {
-        availability.delete(availabilityModel);
+    public void deleteAvailability(AvailabilityEntity availabilityEntity) {
+        this.availability.delete(availabilityEntity);
     }
 
     @Override
@@ -32,8 +32,8 @@ public class SchedulerService implements SchedulerServiceInterface {
     }
 
     @Override
-    public AvailabilityModel createAvailability(AvailabilityModel availabilityModel) {
-        return availability.save(availabilityModel);
+    public AvailabilityEntity createAvailability(AvailabilityEntity availabilityEntity) {
+        return this.availability.save(availabilityEntity);
     }
 
 
