@@ -41,7 +41,7 @@ public class AvailabilityEntity {
 
     //One available row belongs to 1 row in schedule table
     @ManyToOne
-    @JoinColumn(name = "scheduleId")
+    @JoinColumn(name = "scheduleId", nullable = true)
     private DailyScheduleEntity scheduleId;
 
 }

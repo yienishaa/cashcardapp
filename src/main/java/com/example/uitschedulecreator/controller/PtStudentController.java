@@ -33,12 +33,8 @@ public class PtStudentController implements PtStudentControllerInterface {
         System.out.println(ptStudentEntity);
         ptStudentService.createPtStudent(ptStudentEntity);
 
-        if(ptStudentService != null){
-            return new ResponseEntity(ptStudentService.getPtStudentById(ptStudentEntity.getId()), HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity(HttpStatus.OK);
-        }
+        return new ResponseEntity(ptStudentService.getPtStudentById(ptStudentEntity.getId()), HttpStatus.OK);
+
     }
 
     @Override
