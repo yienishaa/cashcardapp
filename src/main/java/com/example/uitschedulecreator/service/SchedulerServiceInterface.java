@@ -1,12 +1,12 @@
 package com.example.uitschedulecreator.service;
 
-import com.example.uitschedulecreator.model.AvailabilityModel;
+import com.example.uitschedulecreator.entity.AvailabilityEntity;
 
 public interface SchedulerServiceInterface {
 
-    AvailabilityModel createAvailability(AvailabilityModel availabilityModel);
-    AvailabilityModel getAvailability(Integer id);
-    void deleteAvailability(AvailabilityModel availabilityModel);
+    AvailabilityEntity createAvailability(AvailabilityEntity availabilityEntity);
+    AvailabilityEntity getAvailability(Integer id);
+    void deleteAvailability(AvailabilityEntity availabilityEntity);
     void deleteAllAvailabilities();
 }
 

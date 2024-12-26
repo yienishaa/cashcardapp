@@ -1,17 +1,20 @@
 package com.example.uitschedulecreator.controller;
 
-import com.example.uitschedulecreator.model.PtStudentModel;
+import com.example.uitschedulecreator.entity.PtStudentEntity;
 import com.example.uitschedulecreator.service.PtStudentService;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
 public class PtStudentController implements PtStudentControllerInterface {
-
+    Log log = LogFactory.getLog(PtStudentController.class);
     private final PtStudentService ptStudentService;
 
     @Autowired
@@ -20,31 +23,29 @@ public class PtStudentController implements PtStudentControllerInterface {
     }
 
     @Override
-    public ResponseEntity<PtStudentService> findById(Integer studentId) {
-        //the requestId variable name matches the one in URL so Spring knows to assign value
+    public Optional<PtStudentEntity> findById(Integer studentId) {
 
-        Optional<PtStudentService> ptStudent = Optional.ofNullable(ptStudentService);
-        //We're calling JpaRepository.findById, which returns an Optional.
-        // This smart object might or might not contain the CashCard for which we're searching
-
-        if (ptStudent.isPresent()) {
-            return new ResponseEntity<>(ptStudent.get(), HttpStatus.OK);
-        }
-        else{
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
+        return ptStudentService.getPtStudentById(studentId);
     }
 
     @Override
-    public ResponseEntity<String> addPtStudent(PtStudentModel ptStudentModel) {
-        ptStudentService.createPtStudent(ptStudentModel);
+    public ResponseEntity<PtStudentService> addPtStudent(PtStudentEntity ptStudentEntity) {
+        System.out.println(ptStudentEntity);
+        ptStudentService.createPtStudent(ptStudentEntity);
 
-        if(ptStudentService.getPtStudentById(ptStudentModel.getId()) != null){
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        else {
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
+        return new ResponseEntity(ptStudentService.getPtStudentById(ptStudentEntity.getId()), HttpStatus.OK);
+
+    }
+
+    @Override
+    public void deletePtStudent(Integer studentId) {
+        ptStudentService.deletePtStudentById(studentId);
+    }
+
+
+    @Override
+    public ResponseEntity<List<PtStudentEntity>> findAllPtStudent() {
+        return new ResponseEntity(ptStudentService.getAllPtStudents(), HttpStatus.OK);
     }
 
 }

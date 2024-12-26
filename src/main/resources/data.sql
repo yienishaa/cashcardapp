@@ -1,1 +1,1 @@
-//INSERT INTO CASH_CARD(id, amount, version) VALUES (92, 239.12, 0);
+INSERT INTO SHIFT(shiftDescription, hours) VALUES ( 'MONDAY0830', 3.5 );
