@@ -2,7 +2,9 @@ package com.example.uitschedulecreator.service;
 
 import com.example.uitschedulecreator.entity.PtStudentEntity;
 import com.example.uitschedulecreator.repository.PtStudentRepository;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,15 +14,18 @@ import java.util.Optional;
 
 @Getter
 @Setter
+@NoArgsConstructor
 @Service
 public class PtStudentService implements PtStudentServiceInterface{
 
-    @Autowired //since Autowired is used an instance of ptstudentrepo is created, we dont need to create one again in below methods
-    private final PtStudentRepository ptStudentRepository;
+    @Autowired
+    private PtStudentRepository ptStudentRepository;
 
+    //since Autowired is used an instance of ptstudentrepo is created, we dont need to create one again in below methods
     public PtStudentService(PtStudentRepository ptStudentRepository) {
         this.ptStudentRepository = ptStudentRepository;
     }
+
 
     @Override
     public PtStudentEntity createPtStudent(PtStudentEntity ptStudentEntity) {
@@ -41,8 +46,8 @@ public class PtStudentService implements PtStudentServiceInterface{
     }
 
     @Override
-    public Optional<PtStudentEntity> getPtStudentById(int id) {
-        return ptStudentRepository.findById(id);
+    public Optional<PtStudentEntity> getPtStudentByID(String studentID) {
+        return ptStudentRepository.findByStudentID(studentID);
     }
 
 }

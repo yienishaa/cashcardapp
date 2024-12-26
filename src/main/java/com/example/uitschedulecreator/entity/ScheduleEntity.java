@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -27,18 +28,23 @@ import java.util.Set;
 @AllArgsConstructor
 @Builder
 @Table(name = "SCHEDULE")
-public class DailyScheduleEntity {
+public class ScheduleEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "scheduleId")
     private Integer scheduleId;
 
-    @Column(name = "dayOfWeek")
-    private String dayOfWeek;
+    @Column(name = "weekId")
+    private String weekId;
 
     // One scheduled shift can match several rows in availability table
     @OneToMany(mappedBy = "scheduleId")
     private Set<AvailabilityEntity> availabilityEntity;
+
+    public ScheduleEntity(String weekId, Set<AvailabilityEntity> availabilityEntity) {
+        this.weekId = weekId;
+        this.availabilityEntity = availabilityEntity;
+    }
 
 }

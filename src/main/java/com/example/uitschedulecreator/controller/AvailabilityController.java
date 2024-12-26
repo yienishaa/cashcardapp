@@ -13,7 +13,7 @@ import java.util.Optional;
 @Controller
 public class AvailabilityController implements AvailabilityControllerInterface {
 
-    private AvailabilityService availabilityService;
+    private final AvailabilityService availabilityService;
 
     @Autowired
     private AvailabilityController(AvailabilityService availabilityService) {
@@ -21,26 +21,26 @@ public class AvailabilityController implements AvailabilityControllerInterface {
     }
 
     @Override
-    public Optional<AvailabilityEntity> findById(Integer studentId) {
-        return availabilityService.getAvaliabilityById(studentId);
+    public List<AvailabilityEntity> findById(String studentId) {
+        return availabilityService.getAvailabilityByStudentId(studentId);
     }
 
     @Override
-    public ResponseEntity<AvailabilityService> add(AvailabilityEntity availabilityEntity) {
-        System.out.println(availabilityEntity);
-        availabilityService.addAvaliability(availabilityEntity);
-        return new ResponseEntity(availabilityService.
-                getAvaliabilityById(18),HttpStatus.OK);
+    public ResponseEntity<AvailabilityEntity> add(AvailabilityEntity availabilityEntity) {
+        System.out.println(availabilityEntity.getAvailabilityId());
+        AvailabilityEntity availabilityEntity1 = availabilityService.addAvailability(availabilityEntity);
+        return new ResponseEntity<>(availabilityEntity1,HttpStatus.OK);
 
     }
 
     @Override
     public void delete(Integer studentId) {
-        availabilityService.deleteAvaliabilityById(studentId);
+        availabilityService.deleteAvailabilityById(studentId);
     }
 
     @Override
     public ResponseEntity<List<AvailabilityEntity>> findAllPtStudent() {
-        return new ResponseEntity<>(availabilityService.getAllAvaliabilities(), HttpStatus.OK);
+        System.out.println("findAllPtStudent "+availabilityService.getAllAvailabilities());
+        return new ResponseEntity<>(availabilityService.getAllAvailabilities(), HttpStatus.OK);
     }
 }

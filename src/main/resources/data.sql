@@ -1,1 +1,0 @@
-INSERT INTO SHIFT(shiftDescription, hours) VALUES ( 'MONDAY0830', 3.5 );

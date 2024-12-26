@@ -1,5 +1,6 @@
 package com.example.uitschedulecreator.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +10,7 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.*;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -26,7 +28,7 @@ public class ShiftsEntity {
     @Column(name = "shiftId")
     private Integer shiftId;
 
-    @Column(name = "shiftDescription")
+    @Column(name = "shiftDescription", unique = true)
     private String shiftDescription;
 
     @Column(name = "hours")
@@ -34,6 +36,12 @@ public class ShiftsEntity {
 
     //One shift can have may availablilies
     @OneToMany(mappedBy = "shiftId")
+    @JsonIgnore
     private Set<AvailabilityEntity> availabilities;
+
+    public ShiftsEntity(String shiftDescription, Double hours) {
+        this.shiftDescription = shiftDescription;
+        this.hours = hours;
+    }
 
 }

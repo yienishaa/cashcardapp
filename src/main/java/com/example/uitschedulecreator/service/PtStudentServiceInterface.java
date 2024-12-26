@@ -10,6 +10,6 @@ public interface PtStudentServiceInterface {
     PtStudentEntity createPtStudent(PtStudentEntity ptStudentEntity);
     void deletePtStudentById(Integer studentId);
     List<PtStudentEntity> getAllPtStudents();
-    Optional<PtStudentEntity> getPtStudentById(int id);
+    Optional<PtStudentEntity> getPtStudentByID(String studentID);
 
 }
