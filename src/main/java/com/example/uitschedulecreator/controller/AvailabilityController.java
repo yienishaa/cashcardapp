@@ -13,7 +13,7 @@ import java.util.Optional;
 @Controller
 public class AvailabilityController implements AvailabilityControllerInterface {
 
-    private AvailabilityService availabilityService;
+    private final AvailabilityService availabilityService;
 
     @Autowired
     private AvailabilityController(AvailabilityService availabilityService) {
@@ -26,11 +26,10 @@ public class AvailabilityController implements AvailabilityControllerInterface {
     }
 
     @Override
-    public ResponseEntity<AvailabilityService> add(AvailabilityEntity availabilityEntity) {
+    public ResponseEntity<AvailabilityEntity> add(AvailabilityEntity availabilityEntity) {
         System.out.println(availabilityEntity);
-        availabilityService.addAvaliability(availabilityEntity);
-        return new ResponseEntity(availabilityService.
-                getAvaliabilityById(18),HttpStatus.OK);
+        AvailabilityEntity availabilityEntity1 = availabilityService.addAvaliability(availabilityEntity);
+        return new ResponseEntity<>(availabilityEntity1,HttpStatus.OK);
 
     }
 
@@ -41,6 +40,7 @@ public class AvailabilityController implements AvailabilityControllerInterface {
 
     @Override
     public ResponseEntity<List<AvailabilityEntity>> findAllPtStudent() {
+        System.out.println("findAllPtStudent "+availabilityService.getAllAvaliabilities());
         return new ResponseEntity<>(availabilityService.getAllAvaliabilities(), HttpStatus.OK);
     }
 }

@@ -1,5 +1,6 @@
 package com.example.uitschedulecreator.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,7 @@ public class PtStudentEntity {
     @Column(name = "Id")
     private Integer Id;
 
-    @Column(name = "studentID")
+    @Column(name = "studentID" , unique = true)
     private String studentID;
 
     @Column(name = "name")
@@ -41,6 +42,7 @@ public class PtStudentEntity {
     private Double hoursAllowed;
 
     @OneToMany(mappedBy = "studentId") //One student has Many availabilities, mappedBy='studentId' means in the AvailabilityModel class studentId is the foreign key
+    @JsonIgnore
     private Set<AvailabilityEntity> availabilities;
 
 }

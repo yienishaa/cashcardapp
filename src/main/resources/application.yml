@@ -6,7 +6,7 @@ spring:
     driver-class-name: org.h2.Driver
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
     show-sql: true
@@ -18,8 +18,6 @@ spring:
   sql:
     init:
       mode: always
-      data-locations:
-        classpath: "src/main/resources/data.sql"
   jackson:
     property-naming-strategy: LOWER_CAMEL_CASE
 
