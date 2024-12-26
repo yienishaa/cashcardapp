@@ -17,7 +17,7 @@ public interface PtStudentControllerInterface {
 
     //GetMapping tells Spring to route only GET requests
     @GetMapping("/csstaff/ptstudent/find")
-    public Optional<PtStudentEntity> findById(@RequestParam Integer studentId);
+    public Optional<PtStudentEntity> findById(@RequestParam String studentId);
 
     @PostMapping("/csstaff/ptstudent/add")
     public ResponseEntity<PtStudentService> addPtStudent(@RequestBody PtStudentEntity ptStudentEntity);

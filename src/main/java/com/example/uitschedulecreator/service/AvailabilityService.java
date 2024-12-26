@@ -8,8 +8,8 @@ import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Getter
 @Setter
@@ -25,25 +25,22 @@ public class AvailabilityService implements AvailabilityServiceInterface {
     }
 
     @Override
-    public AvailabilityEntity addAvaliability(AvailabilityEntity availabilityEntity) {
-        System.out.println(availabilityEntity.toString());
-        System.out.println(availabilityEntity.getStudentId().toString());
-        System.out.println(availabilityEntity.getShiftId().toString());
+    public AvailabilityEntity addAvailability(AvailabilityEntity availabilityEntity) {
         return availabilityRepository.save(availabilityEntity);
     }
 
     @Override
-    public void deleteAvaliabilityById(Integer studentId) {
+    public void deleteAvailabilityById(Integer studentId) {
         availabilityRepository.deleteById(studentId);
     }
 
     @Override
-    public List<AvailabilityEntity> getAllAvaliabilities() {
+    public List<AvailabilityEntity> getAllAvailabilities() {
         return availabilityRepository.findAll();
     }
 
     @Override
-    public Optional<AvailabilityEntity> getAvaliabilityById(int id) {
-        return availabilityRepository.findById(id);
+    public List<AvailabilityEntity> getAvailabilityByStudentId(String studentId) {
+        return availabilityRepository.findByStudentId_StudentID(studentId);
     }
 }

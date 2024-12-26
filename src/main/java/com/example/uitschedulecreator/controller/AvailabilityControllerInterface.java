@@ -16,7 +16,7 @@ public interface AvailabilityControllerInterface {
 
     //GetMapping tells Spring to route only GET requests
     @GetMapping("/csstaff/availablility/find")
-    Optional<AvailabilityEntity> findById(@RequestParam Integer availabilityId);
+    List<AvailabilityEntity> findById(@RequestParam String studentId);
 
     @PostMapping("/csstaff/availablility/add")
     ResponseEntity<AvailabilityEntity> add(@RequestBody AvailabilityEntity availabilityEntity);

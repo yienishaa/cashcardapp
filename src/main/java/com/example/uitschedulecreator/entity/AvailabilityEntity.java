@@ -1,7 +1,6 @@
 package com.example.uitschedulecreator.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,6 +35,6 @@ public class AvailabilityEntity {
     //One available row belongs to 1 row in schedule table
     @ManyToOne
     @JoinColumn(name = "scheduleId", nullable = true)
-    private DailyScheduleEntity scheduleId;
+    private ScheduleEntity scheduleId;
 
 }

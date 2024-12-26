@@ -23,9 +23,9 @@ public class PtStudentController implements PtStudentControllerInterface {
     }
 
     @Override
-    public Optional<PtStudentEntity> findById(Integer studentId) {
+    public Optional<PtStudentEntity> findById(String studentId) {
 
-        return ptStudentService.getPtStudentById(studentId);
+        return ptStudentService.getPtStudentByID(studentId);
     }
 
     @Override
@@ -33,7 +33,7 @@ public class PtStudentController implements PtStudentControllerInterface {
         System.out.println(ptStudentEntity);
         ptStudentService.createPtStudent(ptStudentEntity);
 
-        return new ResponseEntity(ptStudentService.getPtStudentById(ptStudentEntity.getId()), HttpStatus.OK);
+        return new ResponseEntity(ptStudentService.getPtStudentByID(ptStudentEntity.getStudentID()), HttpStatus.OK);
 
     }
 
