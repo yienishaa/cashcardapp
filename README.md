@@ -6,11 +6,10 @@ This project implements a **Student Shift Scheduling System** that allows users 
 ---
 
 ## Features
-- **Student Management**: Add, update, and view student details.
+- **Student Management**: Add, delete, and view student details.
 - **Availability Tracking**: Record each student's availability for specific shifts.
-- **Shift Management**: Define and manage multiple shifts in a day.
-- **Automatic Scheduling**: Assign students to available shifts based on their availability.
-- **Flexible Configuration**: Easily configure the number of shifts and working hours.
+- **Shift Management**: Define multiple shifts in a day.
+- **Scheduling**: Assign students to available shifts based on their availability.
 
 ---
 
@@ -18,7 +17,7 @@ This project implements a **Student Shift Scheduling System** that allows users 
 The system consists of the following main components:
 
 1. **Student Table**:
-   - Stores student details such as name, ID, and availability.
+   - Stores student details such as name, student ID, and phone number.
 2. **Shift Table**:
    - Maintains predefined shifts for each day.
 3. **Scheduling Class**:
@@ -27,48 +26,28 @@ The system consists of the following main components:
 ---
 
 ## How It Works
+0. **Define Shifts**:
+   - Set up shifts using LoadInitialData  (e.g., MONDAY0830, TUESDAY1200).
 1. **Add Students**:
-   - Input student details and their available shifts.
-2. **Define Shifts**:
-   - Set up shifts (e.g., Morning, Afternoon, Evening, and Night).
-3. **Schedule Generation**:
-   - The scheduling algorithm iterates through the list of students and assigns them to shifts.
+   - Input student details.
+1. **Add Availabilities**:
+   - Input availability for each student.
+2. **Schedule Generation**:
+   - The scheduling algorithm iterates through the list of students and assigns them to shifts randomly
 
 ---
-
-## Installation
-1. **Clone the Repository**:
-```bash
- git clone https://github.com/your-repo/student-shift-scheduler.git
-```
-2. **Install Dependencies**:
-```bash
- pip install -r requirements.txt
-```
-3. **Run the Application**:
-```bash
- python main.py
-```
-
----
-
-## Usage
-1. Add students and their availability using the input prompts or configuration files.
-2. Define shifts in the database or configuration.
-3. Run the scheduler to generate the assignments.
-4. View or export the schedule as needed.
 
 ---
 
 ## Configuration
 ### Shift Setup
-Edit the `shifts.json` or database table to define the number and timing of shifts:
-```json
+Edit the `LoadInitialData.java` or database table to define the number and timing of shifts:
+```java
 [
-  {"id": 1, "name": "Morning", "start_time": "08:00", "end_time": "12:00"},
-  {"id": 2, "name": "Afternoon", "start_time": "12:00", "end_time": "16:00"},
-  {"id": 3, "name": "Evening", "start_time": "16:00", "end_time": "20:00"},
-  {"id": 4, "name": "Night", "start_time": "20:00", "end_time": "00:00"}
+   shiftRepository.save(new ShiftsEntity("MONDAY0830", 3.5));
+   shiftRepository.save(new ShiftsEntity("MONDAY1200", 3.0));
+   shiftRepository.save(new ShiftsEntity("MONDAY1500", 3.0));
+   shiftRepository.save(new ShiftsEntity("MONDAY1800", 3.0));
 ]
 ```
 
@@ -76,44 +55,61 @@ Edit the `shifts.json` or database table to define the number and timing of shif
 
 ## Example
 Sample input data for students and shifts:
-```python
-students = [
-    {"id": 1, "name": "Alice", "availability": [1, 2]},
-    {"id": 2, "name": "Bob", "availability": [3, 4]},
-    {"id": 3, "name": "Charlie", "availability": [1, 3]}
-]
+```json
+{
+    "studentID" : "5678",
+    "name" : "Anne",
+    "phone_number" : "234332",
+    "hours_allowed" : 3.9
+}
+
+{
+    "studentId" : 
+    {
+        "id" : 1,
+        "studentID" : "5678"
+    },
+    "shiftId" : 
+    {
+        "shiftId" : 3
+    }
+}
 ```
 
 Output schedule:
-```python
-assignments = {
-    "Morning": ["Alice", "Charlie"],
-    "Afternoon": ["Alice"],
-    "Evening": ["Bob", "Charlie"],
-    "Night": ["Bob"]
-}
+```json
+[
+    {
+        "scheduleId": 1,
+        "weekId": "52",
+        "availabilityEntity": [
+            {
+                "availabilityId": 3,
+                "studentId": {
+                    "studentID": "1234",
+                    "name": "Marry",
+                    "id": 1,
+                    "phone_number": "097888",
+                    "hours_allowed": 30.9
+                },
+                "shiftId": {
+                    "shiftId": 3,
+                    "shiftDescription": "MONDAY1500",
+                    "hours": 3.0
+                },
+                "scheduleId": null
+            }
+        ]
+    }
+]
 ```
 
 ---
 
 ## Future Enhancements
 - Implement shift prioritization based on student preferences.
-- Add export options (e.g., CSV, Excel).
 - Integrate a web interface for easier management.
 - Include notifications for shift reminders.
 
 ---
-
-## Contributing
-Contributions are welcome! Please submit a pull request or open an issue for suggestions or bug reports.
-
----
-
-## License
-This project is licensed under the [MIT License](LICENSE).
-
----
-
-## Contact
-For questions or support, reach out via email at [contact@example.com](mailto:contact@example.com).
 
